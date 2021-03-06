@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entities\TransactionLogs\Repositories\Interfaces;
+namespace App\Entities\Users\Repositories\Interfaces;
 
-use App\Entities\TransactionLogs\TransactionLog;
+use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
 
 /**
- * Interface TransactionLogRepositoryInterface
+ * Interface UserRepositoryInterface
  * @package App\Entities\TransactionLogs\Repositories\Interfaces
  */
 interface TransactionLogRepositoryInterface

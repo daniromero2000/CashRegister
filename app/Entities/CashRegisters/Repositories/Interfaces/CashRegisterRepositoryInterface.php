@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\CashRegisters\Repositories\Interfaces;
+namespace App\Entities\Users\Entities\CashRegisters\Repositories\Interfaces;
 
-use App\Entities\CashRegisters\CashRegister;
+use App\Entities\Users\Entities\CashRegisters\CashRegister;
 
 /**
  * Interface CashRegisterRepositoryInterface

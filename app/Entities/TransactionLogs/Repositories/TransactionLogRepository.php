@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entities\TransactionLogs\Repositories;
+namespace App\Entities\Users\Entities\TransactionLogs\Repositories;
 
-use App\Entities\TransactionLogs\TransactionLog;
+use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
 
 /**
- * Class TransactionLogRepository
+ * Class UserRepository
  * @package App\Entities\TransactionLogs\Repositories
  * @author Daniel Romero - 123romerod@gmail.com
  */
@@ -23,7 +23,7 @@ class TransactionLogRepository
      */
     public function __construct(TransactionLog $transactionLog)
     {
-        $this->log = $transactionLog;
+        $this->transactionLog = $transactionLog;
     }
 
     /**
@@ -32,7 +32,7 @@ class TransactionLogRepository
      */
     public function listLogs(array $columns = ['*']): array
     {
-        return $this->log->with('cashFlow')->get($columns)->toArray();
+        return $this->transactionLog->get($columns)->toArray();
     }
 
     /**
@@ -41,6 +41,6 @@ class TransactionLogRepository
      */
     public function createLog(array $data): TransactionLog
     {
-        return $this->log->create($data);
+        return $this->transactionLog->create($data);
     }
 }

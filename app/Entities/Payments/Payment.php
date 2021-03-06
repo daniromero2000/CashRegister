@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Payments;
+namespace App\Entities\Users\Entities\Payments;
 
 use Illuminate\Database\Eloquent\Model;
 

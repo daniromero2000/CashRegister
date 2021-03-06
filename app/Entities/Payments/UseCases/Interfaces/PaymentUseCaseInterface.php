@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities\Payments\UseCases\Interfaces;
+namespace App\Entities\Users\Entities\Payments\UseCases\Interfaces;
 
 
 interface PaymentUseCaseInterface

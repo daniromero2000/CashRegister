@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\CashRegisters;
+namespace App\Entities\Users\Entities\CashRegisters;
 
-use App\Entities\TransactionLogs\TransactionLog;
+use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

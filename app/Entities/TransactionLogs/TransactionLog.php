@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\TransactionLogs;
+namespace App\Entities\Users\Entities\TransactionLogs;
 
-use App\Entities\CashRegisters\CashRegister;
+use App\Entities\Users\Entities\CashRegisters\CashRegister;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -57,7 +57,7 @@ class TransactionLog extends Model
     /**
      * @return BelongsToMany
      */
-    public function cashFlow(): BelongsToMany
+    public function cashRegister(): BelongsToMany
     {
         return $this->belongsToMany(CashRegister::class);
     }
