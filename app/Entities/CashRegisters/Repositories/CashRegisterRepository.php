@@ -5,6 +5,11 @@ namespace App\Entities\CashRegisters\Repositories;
 use App\Entities\CashRegisters\CashRegister;
 use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
 
+/**
+ * Class CashRegisterRepository
+ * @package App\Entities\CashRegisters\Repositories
+ * @author Daniel Romero - 123romerod@gmail.com
+ */
 class CashRegisterRepository implements CashRegisterRepositoryInterface
 {
     /**
