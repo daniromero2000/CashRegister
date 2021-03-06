@@ -2,6 +2,7 @@
 
 namespace App\Entities\Users\Repositories;
 
+use App\Entities\Users\Repositories\Interfaces\UserRepositoryInterface;
 use App\Entities\Users\User;
 
 /**
@@ -9,9 +10,8 @@ use App\Entities\Users\User;
  * @package App\Entities\Users\Repositories
  * @author Daniel Romero - 123romerod@gmail.com
  */
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
-
     /**
      * @var User
      */
@@ -25,7 +25,6 @@ class UserRepository
     {
         $this->user = $user;
     }
-
 
     /**
      * @param array $data
