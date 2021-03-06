@@ -8,6 +8,7 @@ use App\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
 /**
  * Class PaymentRepository
  * @package App\Entities\Payments\Repositories
+ * @author Daniel Romero - 123romerod@gmail.com
  */
 class PaymentRepository implements PaymentRepositoryInterface
 {
