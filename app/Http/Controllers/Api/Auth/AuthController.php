@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class AuthController extends Controller
 {
+    /**
+     * @var UserUseCaseInterface
+     */
     protected $userUseCase;
 
     public function __construct(UserUseCaseInterface $userUseCaseInterface)
