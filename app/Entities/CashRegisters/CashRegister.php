@@ -1,17 +1,20 @@
 <?php
 
-
-namespace App\Entities\CashFlows;
-
+namespace App\Entities\CashRegisters;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CashFlow extends Model
+/**
+ * Class CashRegister
+ * @package App\Entities\CashRegisters
+ * @author Daniel Romero - 123romerod@gmail.com
+ */
+class CashRegister extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'cash_flow';
+    protected $table = 'cash_register';
 
     /**
      * @var string[]
