@@ -2,7 +2,9 @@
 
 namespace App\Entities\TransactionLogs;
 
+use App\Entities\CashRegisters\CashRegister;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class TransactionLog
@@ -52,4 +54,11 @@ class TransactionLog extends Model
         'updated_at',
     ];
 
+    /**
+     * @return BelongsToMany
+     */
+    public function cashFlow(): BelongsToMany
+    {
+        return $this->belongsToMany(CashRegister::class);
+    }
 }
