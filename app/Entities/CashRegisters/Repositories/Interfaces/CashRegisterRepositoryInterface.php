@@ -24,6 +24,12 @@ interface CashRegisterRepositoryInterface
     public function createCashRegister(array $data): CashRegister;
 
     /**
+     * @param array $data
+     * @return CashRegister
+     */
+    public function createOrUpdateCashRegister(array $data): CashRegister;
+
+    /**
      * @return bool
      */
     public function setEmptyCashRegister(): bool;

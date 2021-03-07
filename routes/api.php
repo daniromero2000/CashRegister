@@ -26,14 +26,16 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-Route::group(['prefix' => 'merqueoCash'], function () {
+Route::group(['prefix' => 'merqueoCash', 'middleware' => ['auth:api']], function () {
     Route::namespace('Api')->group(function () {
-        Route::group(['prefix' => 'cashRegister', 'middleware' => ['auth:api']], function () {
+        Route::group(['prefix' => 'cashRegister'], function () {
             Route::namespace('CashRegisters')->group(function () {
                 Route::post('/create', 'CashRegisterController@createMoneyBaseCashRegister')
                     ->name('cashRegister.create');
                 Route::get('/checkStatus', 'CashRegisterController@checkStatusCashRegister')
                     ->name('cashRegister.getStatus');
+                Route::get('/withdrawAllMoney', 'CashRegisterController@withdrawAllMoneyCashRegister')
+                    ->name('cashFlow.withdrawAllMoney');
             });
         });
     });

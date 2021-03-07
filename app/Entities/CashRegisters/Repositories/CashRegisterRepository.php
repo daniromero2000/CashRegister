@@ -45,7 +45,31 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
      */
     public function createCashRegister(array $data): CashRegister
     {
-        return $this->cashRegister->create($data);
+        $cashRegister = $this->cashRegister->create($data);
+
+        return $cashRegister;
+    }
+
+
+    /**
+     * @param array $data
+     * @return CashRegister
+     */
+    public function createOrUpdateCashRegister(array $data): CashRegister
+    {
+        $cashRegister = $this->cashRegister
+            ->where('denomination', $data['denomination'])
+            ->where('value', $data['value'])
+            ->first();
+
+        if ($cashRegister) {
+            $quantity = $cashRegister->quantity + $data['quantity'];
+            $cashRegister->update(['quantity' => $quantity]);
+        }else{
+            $cashRegister = $this->createCashRegister($data);
+        }
+
+        return $cashRegister;
     }
 
     /**
@@ -53,7 +77,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
      */
     public function setEmptyCashRegister(): bool
     {
-        return $this->cashRegister->where('quantity','>', 0)
+        return $this->cashRegister->where('quantity', '>', 0)
             ->update(['quantity' => 0]);
     }
 

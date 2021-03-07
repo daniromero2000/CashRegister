@@ -39,7 +39,8 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
     public function createMoneyBase(array $data): array
     {
         try {
-            $cashRegister = $this->cashRegisterInterface->createCashRegister($data);
+            $cashRegister = $this->cashRegisterInterface->createOrUpdateCashRegister($data);
+
             $log = $this->transactionLogInterface->createTransactionLog(
                 [
                     'type' => 'load_base',
@@ -49,7 +50,7 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
             $cashRegister->transactionLogs()->attach($log,
                 [
                     'cash_register_quantity' => $cashRegister->quantity,
-                    'user_id' => auth()->user()->id
+                    'user_id' => auth()->user() ? auth()->user()->id : 1
                 ]);
 
             return ['status' => true, 'message' => 'correcto'];
@@ -65,10 +66,10 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
     {
         $data = [
             'total_cash_register' => 0,
-            'total_coin' => [],
             'coin' => [],
-            'total_bill' => [],
-            'bill' => []
+            'total_coin' => 0,
+            'bill' => [],
+            'total_bill' => 0
         ];
 
         $listCashRegister = $this->cashRegisterInterface->listCashRegisters();
@@ -76,9 +77,8 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
         foreach ($listCashRegister as $cashRegister) {
             $data['total_cash_register'] += $cashRegister['value'] * $cashRegister['quantity'];
             $data[$cashRegister['denomination']][] = ['value' => $cashRegister['value'], 'quantity' => $cashRegister['quantity']];
+            $data['total_'.$cashRegister['denomination']] += $cashRegister['value'] * $cashRegister['quantity'];
         }
-
-        dd($data);
 
         return ['status' => true, 'message' => $data];
     }
