@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entities\Users\Entities\Payments\Repositories;
+namespace App\Entities\Payments\Repositories;
 
-use App\Entities\Users\Entities\Payments\Payment;
-use App\Entities\Users\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
+use App\Entities\Payments\Payment;
+use App\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
 
 /**
  * Class PaymentRepository

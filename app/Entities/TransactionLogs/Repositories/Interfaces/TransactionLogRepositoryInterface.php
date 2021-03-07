@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Users\Repositories\Interfaces;
+namespace App\Entities\TransactionLogs\Repositories\Interfaces;
 
-use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
+use App\Entities\TransactionLogs\TransactionLog;
 
 /**
  * Interface UserRepositoryInterface

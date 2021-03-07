@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Entities\Users\Entities\TransactionLogs\Repositories;
+namespace App\Entities\TransactionLogs\Repositories;
 
-use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
+use App\Entities\TransactionLogs\Exceptions\CreateTransactionLogErrorException;
+use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
+use App\Entities\TransactionLogs\TransactionLog;
+use Illuminate\Database\QueryException;
 
 /**
  * Class UserRepository
  * @package App\Entities\TransactionLogs\Repositories
  * @author Daniel Romero - 123romerod@gmail.com
  */
-class TransactionLogRepository
+class TransactionLogRepository implements TransactionLogRepositoryInterface
 {
 
     /**
@@ -30,7 +33,7 @@ class TransactionLogRepository
      * @param array|string[] $columns
      * @return array
      */
-    public function listLogs(array $columns = ['*']): array
+    public function listTransactionLogs(array $columns = ['*']): array
     {
         return $this->transactionLog->get($columns)->toArray();
     }
@@ -38,9 +41,14 @@ class TransactionLogRepository
     /**
      * @param array $data
      * @return TransactionLog
+     * @throws CreateTransactionLogErrorException
      */
-    public function createLog(array $data): TransactionLog
+    public function createTransactionLog(array $data): TransactionLog
     {
-        return $this->transactionLog->create($data);
+        try{
+            return $this->transactionLog->create($data);
+        }catch (QueryException $e){
+            throw new CreateTransactionLogErrorException($e);
+        }
     }
 }

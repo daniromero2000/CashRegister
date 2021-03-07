@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities\Users\Entities\TransactionLogs\UseCases;
+namespace App\Entities\TransactionLogs\UseCases;
 
 
 class TransactionLogUseCase

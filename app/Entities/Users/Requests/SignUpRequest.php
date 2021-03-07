@@ -4,6 +4,10 @@ namespace App\Entities\Users\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SignUpRequest
+ * @package App\Entities\Users\Requests
+ */
 class SignUpRequest extends FormRequest
 {
     /**

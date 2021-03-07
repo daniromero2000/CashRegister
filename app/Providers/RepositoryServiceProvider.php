@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Entities\Users\Entities\CashRegisters\Repositories\CashRegisterRepository;
-use App\Entities\Users\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
-use App\Entities\Users\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
-use App\Entities\Users\Entities\Payments\Repositories\PaymentRepository;
-use App\Entities\Users\Entities\TransactionLogs\Repositories\TransactionLogRepository;
-use App\Entities\Users\Repositories\Interfaces\TransactionLogRepositoryInterface;
+use App\Entities\CashRegisters\Repositories\CashRegisterRepository;
+use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
+use App\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
+use App\Entities\Payments\Repositories\PaymentRepository;
+use App\Entities\TransactionLogs\Repositories\TransactionLogRepository;
+use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
 use App\Entities\Users\Repositories\Interfaces\UserRepositoryInterface;
 use App\Entities\Users\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;

@@ -17,7 +17,8 @@ class CreateCashRegisterTransactionLogTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cash_register_id');
             $table->unsignedBigInteger('transaction_log_id');
-            $table->integer('cash_register_count');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('cash_register_quantity');
         });
     }
 

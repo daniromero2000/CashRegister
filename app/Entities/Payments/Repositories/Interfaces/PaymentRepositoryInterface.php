@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Users\Entities\Payments\Repositories\Interfaces;
+namespace App\Entities\Payments\Repositories\Interfaces;
 
-use App\Entities\Users\Entities\Payments\Payment;
+use App\Entities\Payments\Payment;
 
 /**
  * Interface PaymentRepositoryInterface

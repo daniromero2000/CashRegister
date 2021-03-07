@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities\Users\UseCases\Interfaces;
+namespace App\Entities\TransactionLogs\UseCases\Interfaces;
 
 
 interface TransactionLogUseCaseInterface

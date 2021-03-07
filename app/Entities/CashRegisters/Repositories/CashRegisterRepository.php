@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Entities\Users\Entities\CashRegisters\Repositories;
+namespace App\Entities\CashRegisters\Repositories;
 
-use App\Entities\Users\Entities\CashRegisters\CashRegister;
-use App\Entities\Users\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
+use App\Entities\CashRegisters\CashRegister;
+use App\Entities\CashRegisters\Exceptions\CreateCashRegisterErrorException;
+use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
+use Illuminate\Database\QueryException;
 
 /**
  * Class CashRegisterRepository
@@ -32,7 +34,9 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
      */
     public function listCashRegisters(array $columns = ['*']): array
     {
-        return $this->cashRegister->get($columns);
+        $cashRegisterList = $this->cashRegister->get($columns);
+
+        return (empty($cashRegisterList)) ? [] : $cashRegisterList->toArray();
     }
 
     /**
@@ -42,6 +46,15 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     public function createCashRegister(array $data): CashRegister
     {
         return $this->cashRegister->create($data);
+    }
+
+    /**
+     * @return bool
+     */
+    public function setEmptyCashRegister(): bool
+    {
+        return $this->cashRegister->where('quantity','>', 0)
+            ->update(['quantity' => 0]);
     }
 
 }

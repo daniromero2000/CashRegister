@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entities\Users\Entities\CashRegisters\Repositories\Interfaces;
+namespace App\Entities\CashRegisters\Repositories\Interfaces;
 
-use App\Entities\Users\Entities\CashRegisters\CashRegister;
+use App\Entities\CashRegisters\Exceptions\CreateCashRegisterErrorException;
+use App\Entities\CashRegisters\CashRegister;
 
 /**
  * Interface CashRegisterRepositoryInterface
@@ -21,4 +22,10 @@ interface CashRegisterRepositoryInterface
      * @return CashRegister
      */
     public function createCashRegister(array $data): CashRegister;
+
+    /**
+     * @return bool
+     */
+    public function setEmptyCashRegister(): bool;
+
 }

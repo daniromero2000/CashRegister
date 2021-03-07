@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Users\Entities\CashRegisters;
+namespace App\Entities\CashRegisters;
 
-use App\Entities\Users\Entities\TransactionLogs\TransactionLog;
+use App\Entities\TransactionLogs\TransactionLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -16,7 +16,7 @@ class CashRegister extends Model
     /**
      * @var string
      */
-    protected $table = 'cash_register';
+    protected $table = 'cash_registers';
 
     /**
      * @var string[]
@@ -25,7 +25,7 @@ class CashRegister extends Model
         'id',
         'denomination',
         'value',
-        'count',
+        'quantity',
         'created_at',
         'updated_at',
     ];

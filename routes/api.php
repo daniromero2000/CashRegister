@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +23,18 @@ Route::group(['prefix' => 'auth'], function () {
                 Route::get('logout', 'AuthController@logout')->name('logout');
             });
         });
+    });
+});
 
+Route::group(['prefix' => 'merqueoCash'], function () {
+    Route::namespace('Api')->group(function () {
+        Route::group(['prefix' => 'cashRegister', 'middleware' => ['auth:api']], function () {
+            Route::namespace('CashRegisters')->group(function () {
+                Route::post('/create', 'CashRegisterController@createMoneyBaseCashRegister')
+                    ->name('cashRegister.create');
+                Route::get('/checkStatus', 'CashRegisterController@checkStatusCashRegister')
+                    ->name('cashRegister.getStatus');
+            });
+        });
     });
 });

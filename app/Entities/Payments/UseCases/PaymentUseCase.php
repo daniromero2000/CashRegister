@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities\Users\Entities\Payments\UseCases;
+namespace App\Entities\Payments\UseCases;
 
 
 class PaymentUseCase

@@ -34,7 +34,11 @@ class AuthController extends Controller
      */
     public function signUp(SignUpRequest $request): JsonResponse
     {
-        return $this->userUseCase->createUser($request->input());
+        return $this->userUseCase->createUser([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
     }
 
     /**

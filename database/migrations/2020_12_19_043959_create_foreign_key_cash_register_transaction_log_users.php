@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCashRegistersTable extends Migration
+class CreateForeignKeyCashRegisterTransactionLogUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCashRegistersTable extends Migration
      */
     public function up()
     {
-        Schema::create('cash_registers', function (Blueprint $table) {
-            $table->id();
-            $table->string('denomination', 100);
-            $table->integer('value');
-            $table->integer('quantity');
-            $table->timestamps();
+        Schema::table('cash_register_transaction_log', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateCashRegistersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cash_registers');
+        Schema::table('cash_register_transaction_log', function (Blueprint $table) {
+            //
+        });
     }
 }
