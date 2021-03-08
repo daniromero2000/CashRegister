@@ -21,8 +21,10 @@ class Payment extends Model
      */
     protected $fillable = [
         'id',
-        'total_customer',
-        'total_purchase',
+        'customer_payment',
+        'amount_payable',
+        'total_returned',
+        'payment_denomination',
         'created_at',
         'updated_at'
     ];

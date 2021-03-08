@@ -25,9 +25,7 @@ class CashRegisterControllerTest extends TestCase
 
     public function testCreateMoneyBaseCashRegisterSuccess(): void
     {
-        factory(User::class)->create([
-            'id' => 1
-        ]);
+        factory(User::class)->create();
 
         $data = [
             'denomination' => 'bill',

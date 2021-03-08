@@ -47,5 +47,12 @@ Route::group(['prefix' => 'merqueoCash', 'middleware' => ['auth:api']], function
                     ->name('transactionLog.getStatusByDate');
             });
         });
+
+        Route::group(['prefix' => 'payments'], function () {
+            Route::namespace('Payments')->group(function () {
+                Route::post('/createPayment', 'PaymentController@createPayment')
+                    ->name('payment.createPayment');
+            });
+        });
     });
 });

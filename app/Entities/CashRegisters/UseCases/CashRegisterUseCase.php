@@ -53,7 +53,7 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
                     'user_id' => auth()->user() ? auth()->user()->id : 1
                 ]);
 
-            return ['status' => true, 'message' => 'correcto'];
+            return ['status' => true, 'message' => 'success'];
         } catch (\Exception $e) {
             return ['status' => false, 'message' => $e->getMessage()];
         }

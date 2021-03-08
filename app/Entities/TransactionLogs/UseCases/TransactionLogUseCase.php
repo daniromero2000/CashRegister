@@ -74,6 +74,9 @@ class TransactionLogUseCase implements TransactionLogUseCaseInterface
         $totalCashRegister = 0;
 
         foreach ($listLogs as $listLog) {
+            if($listLog['type'] == 'cash_back'){
+                $totalCashRegister -= $listLog['value'];
+            }
             $totalCashRegister += $listLog['value'];
         }
 

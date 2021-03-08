@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Entities\CashRegisters\UseCases\CashRegisterUseCase;
 use App\Entities\CashRegisters\UseCases\Interfaces\CashRegisterUseCaseInterface;
+use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
+use App\Entities\Payments\UseCases\PaymentUseCase;
 use App\Entities\TransactionLogs\UseCases\Interfaces\TransactionLogUseCaseInterface;
 use App\Entities\TransactionLogs\UseCases\TransactionLogUseCase;
 use App\Entities\Users\UseCases\Interfaces\UserUseCaseInterface;
@@ -32,6 +34,11 @@ class UseCaseServiceProvider extends ServiceProvider
         $this->app->bind(
             TransactionLogUseCaseInterface::class,
             TransactionLogUseCase::class
+        );
+
+        $this->app->bind(
+            PaymentUseCaseInterface::class,
+            PaymentUseCase::class
         );
     }
 }

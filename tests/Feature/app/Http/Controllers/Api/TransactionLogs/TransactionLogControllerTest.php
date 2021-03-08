@@ -25,23 +25,23 @@ class TransactionLogControllerTest extends TestCase
 
     public function createDataForTests()
     {
-        factory(User::class)->create([
-            'id' => 1
-        ]);
+        factory(User::class)->create();
 
         $cashRegister = factory(CashRegister::class)->create();
 
-        $log = factory(TransactionLog::class)->create([
+        $logs = factory(TransactionLog::class, 5)->create([
             'value' => $cashRegister->value
         ]);
 
-        $cashRegister->transactionLogs()->attach($log,
-            [
-                'cash_register_quantity' => $cashRegister->quantity,
-                'user_id' => 1
-            ]);
+        foreach ($logs as $log) {
+            $cashRegister->transactionLogs()->attach($log,
+                [
+                    'cash_register_quantity' => $cashRegister->quantity,
+                    'user_id' => 1
+                ]);
+        }
 
-        return $log;
+        return $logs;
     }
 
     public function testListTransactionLogSuccess(): void
@@ -69,11 +69,19 @@ class TransactionLogControllerTest extends TestCase
     public function testGetStatusByDateSuccess(): void
     {
         $data = $this->createDataForTests();
+        $totalCashRegister = 0;
 
-        $request = $this->get(route('transactionLog.getStatusByDate', $data->created_at), ['Accept' => 'application/json']);
+        foreach ($data as $log) {
+            if ($log['type'] == 'cash_back') {
+                $totalCashRegister -= $log['value'];
+            }
+            $totalCashRegister += $log['value'];
+        }
 
-        $request->assertStatus(200)->assertJsonStructure([
-            'total_cash_register'
+        $request = $this->get(route('transactionLog.getStatusByDate', $log->created_at), ['Accept' => 'application/json']);
+
+        $request->assertStatus(200)->assertJson([
+            'total_cash_register' => $totalCashRegister
         ]);
     }
 

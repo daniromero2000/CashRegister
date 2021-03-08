@@ -13,9 +13,10 @@ interface CashRegisterRepositoryInterface
 {
     /**
      * @param array|string[] $columns
+     * @param array $where
      * @return array
      */
-    public function listCashRegisters(array $columns = ['*']): array;
+    public function listCashRegisters(array $columns = ['*'], array $where = []): array;
 
     /**
      * @param array $data
@@ -25,9 +26,10 @@ interface CashRegisterRepositoryInterface
 
     /**
      * @param array $data
+     * @param string $operator
      * @return CashRegister
      */
-    public function createOrUpdateCashRegister(array $data): CashRegister;
+    public function createOrUpdateCashRegister(array $data, string $operator = 'sum'): CashRegister;
 
     /**
      * @return bool

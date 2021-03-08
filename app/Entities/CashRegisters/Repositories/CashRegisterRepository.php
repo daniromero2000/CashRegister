@@ -30,11 +30,17 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
     /**
      * @param array|string[] $columns
+     * @param array $where
      * @return array
      */
-    public function listCashRegisters(array $columns = ['*']): array
+    public function listCashRegisters(array $columns = ['*'], array $where = []): array
     {
-        $cashRegisterList = $this->cashRegister->get($columns);
+        $cashRegisterList = $this->cashRegister
+            ->when($where, function ($query, $where) {
+                return $query->where($where['column'], $where['operator'], $where['value']);
+            })
+            ->orderBy('value', 'DESC')
+            ->get($columns);
 
         return (empty($cashRegisterList)) ? [] : $cashRegisterList->toArray();
     }
@@ -52,9 +58,10 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
     /**
      * @param array $data
+     * @param string $operator
      * @return CashRegister
      */
-    public function createOrUpdateCashRegister(array $data): CashRegister
+    public function createOrUpdateCashRegister(array $data, string $operator = 'sum'): CashRegister
     {
         $cashRegister = $this->cashRegister
             ->where('denomination', $data['denomination'])
@@ -62,7 +69,12 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             ->first();
 
         if ($cashRegister) {
-            $quantity = $cashRegister->quantity + $data['quantity'];
+            if($operator == 'sum'){
+                $quantity = $cashRegister->quantity + $data['quantity'];
+            }else{
+                $quantity = $cashRegister->quantity - $data['quantity'];
+            }
+
             $cashRegister->update(['quantity' => $quantity]);
         }else{
             $cashRegister = $this->createCashRegister($data);
