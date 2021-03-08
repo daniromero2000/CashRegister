@@ -31,8 +31,8 @@ class CashRegisterControllerTest extends TestCase
 
         $data = [
             'denomination' => 'bill',
-            'value' => '50000',
-            'quantity' => '1'
+            'value'        => '50000',
+            'quantity'     => '1'
         ];
 
         $request = $this->post(route('cashRegister.create'), $data, ['Accept' => 'application/json']);
@@ -48,9 +48,8 @@ class CashRegisterControllerTest extends TestCase
 
         $request = $this->post(route('cashRegister.create'), $data, ['Accept' => 'application/json']);
 
-        $request->assertStatus(422);
-
-        $request->assertJson([
+        $request->assertStatus(422)
+            ->assertJson([
             'message' => 'The given data was invalid.',
             'errors' => [
                 'denomination' => [
@@ -70,8 +69,8 @@ class CashRegisterControllerTest extends TestCase
     {
         $data = [
             'denomination' => 'bill',
-            'value' => '50000',
-            'quantity' => '1'
+            'value'        => '50000',
+            'quantity'     => '1'
         ];
 
         $cashRegisterMock = \Mockery::mock(CashRegisterRepositoryInterface::class);
@@ -90,24 +89,23 @@ class CashRegisterControllerTest extends TestCase
 
     public function testCheckStatusCashRegisterSuccess(): void
     {
-        factory(CashRegister::class)->create([
-            'denomination' => 'coin',
-            'value' => '1000',
-            'quantity' => 2,
-        ]);
+        factory(CashRegister::class, 10)->create();
 
         $request = $this->get(route('cashRegister.getStatus'), ['Accept' => 'application/json']);
 
-        $request->assertStatus(200);
+        $request->assertStatus(200)->assertJsonStructure([
+            'total_cash_register',
+            'coin',
+            'total_coin',
+            'bill',
+            'total_bill'
+        ]);
+
     }
 
     public function testWithdrawAllMoneyCashRegisterSuccess(): void
     {
-        factory(CashRegister::class)->create([
-            'denomination' => 'coin',
-            'value' => '1000',
-            'quantity' => 2,
-        ]);
+        factory(CashRegister::class, 10)->create();
 
         $request = $this->get(route('cashFlow.withdrawAllMoney'), ['Accept' => 'application/json']);
 

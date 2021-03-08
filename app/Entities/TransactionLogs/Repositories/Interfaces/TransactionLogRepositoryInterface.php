@@ -3,6 +3,7 @@
 namespace App\Entities\TransactionLogs\Repositories\Interfaces;
 
 use App\Entities\TransactionLogs\TransactionLog;
+use Illuminate\Support\Collection;
 
 /**
  * Interface UserRepositoryInterface
@@ -12,14 +13,17 @@ interface TransactionLogRepositoryInterface
 {
     /**
      * @param array|string[] $columns
-     * @return array
+     * @return Collection
      */
-    public function listTransactionLogs(array $columns = ['*']): array;
+    public function listTransactionLogs(array $columns = ['*']): Collection;
 
     /**
      * @param array $data
      * @return TransactionLog
      */
     public function createTransactionLog(array $data): TransactionLog;
+
+    public function getTransactionLogsByDate(string $date, array $columns = ['*']): array;
+
 
 }

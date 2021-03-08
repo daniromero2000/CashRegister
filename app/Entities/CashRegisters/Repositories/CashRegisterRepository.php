@@ -50,7 +50,6 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
         return $cashRegister;
     }
 
-
     /**
      * @param array $data
      * @return CashRegister

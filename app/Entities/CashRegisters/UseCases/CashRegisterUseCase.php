@@ -44,12 +44,12 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
             $log = $this->transactionLogInterface->createTransactionLog(
                 [
                     'type' => 'load_base',
-                    'value' => $cashRegister->value
+                    'value' => $data['value']
                 ]);
 
             $cashRegister->transactionLogs()->attach($log,
                 [
-                    'cash_register_quantity' => $cashRegister->quantity,
+                    'cash_register_quantity' => $data['quantity'],
                     'user_id' => auth()->user() ? auth()->user()->id : 1
                 ]);
 
@@ -77,7 +77,7 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
         foreach ($listCashRegister as $cashRegister) {
             $data['total_cash_register'] += $cashRegister['value'] * $cashRegister['quantity'];
             $data[$cashRegister['denomination']][] = ['value' => $cashRegister['value'], 'quantity' => $cashRegister['quantity']];
-            $data['total_'.$cashRegister['denomination']] += $cashRegister['value'] * $cashRegister['quantity'];
+            $data['total_' . $cashRegister['denomination']] += $cashRegister['value'] * $cashRegister['quantity'];
         }
 
         return ['status' => true, 'message' => $data];
@@ -88,16 +88,12 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
      */
     public function withdrawAllMoney(): array
     {
-        try{
-            $response = $this->cashRegisterInterface->setEmptyCashRegister();
-            if($response){
-                return ['status' => true, 'message' => 'success'];
-            }
-
-            return ['status' => false, 'message' => 'error'];
-        }catch (\Exception $e){
-            return ['status' => false, 'message' => $e->getMessage()];
+        $response = $this->cashRegisterInterface->setEmptyCashRegister();
+        if ($response) {
+            return ['status' => true, 'message' => 'success'];
         }
+
+        return ['status' => false, 'message' => 'error'];
 
     }
 }

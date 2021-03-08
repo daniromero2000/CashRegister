@@ -6,6 +6,7 @@ use App\Entities\TransactionLogs\Exceptions\CreateTransactionLogErrorException;
 use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
 use App\Entities\TransactionLogs\TransactionLog;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Collection;
 
 /**
  * Class UserRepository
@@ -14,7 +15,6 @@ use Illuminate\Database\QueryException;
  */
 class TransactionLogRepository implements TransactionLogRepositoryInterface
 {
-
     /**
      * @var TransactionLog
      */
@@ -31,11 +31,11 @@ class TransactionLogRepository implements TransactionLogRepositoryInterface
 
     /**
      * @param array|string[] $columns
-     * @return array
+     * @return Collection
      */
-    public function listTransactionLogs(array $columns = ['*']): array
+    public function listTransactionLogs(array $columns = ['*']): Collection
     {
-        return $this->transactionLog->get($columns)->toArray();
+        return $this->transactionLog->get($columns);
     }
 
     /**
@@ -45,10 +45,11 @@ class TransactionLogRepository implements TransactionLogRepositoryInterface
      */
     public function createTransactionLog(array $data): TransactionLog
     {
-        try{
-            return $this->transactionLog->create($data);
-        }catch (QueryException $e){
-            throw new CreateTransactionLogErrorException($e);
-        }
+        return $this->transactionLog->create($data);
+    }
+
+    public function getTransactionLogsByDate(string $date, array $columns = ['*']): array
+    {
+        return $this->transactionLog->where('created_at', '<=', $date)->get($columns)->toArray();
     }
 }

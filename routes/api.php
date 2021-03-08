@@ -38,5 +38,14 @@ Route::group(['prefix' => 'merqueoCash', 'middleware' => ['auth:api']], function
                     ->name('cashFlow.withdrawAllMoney');
             });
         });
+
+        Route::group(['prefix' => 'transactionLog'], function () {
+            Route::namespace('TransactionLogs')->group(function () {
+                Route::get('/getLogs', 'TransactionLogController@getLogs')
+                    ->name('transactionLog.getLogs');
+                Route::get('/getStatusByDate/{date}', 'TransactionLogController@getStatusByDate')
+                    ->name('transactionLog.getStatusByDate');
+            });
+        });
     });
 });

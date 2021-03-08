@@ -59,6 +59,6 @@ class TransactionLog extends Model
      */
     public function cashRegister(): BelongsToMany
     {
-        return $this->belongsToMany(CashRegister::class);
+        return $this->belongsToMany(CashRegister::class)->withPivot('cash_register_quantity');
     }
 }
