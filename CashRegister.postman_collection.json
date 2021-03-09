@@ -1,0 +1,488 @@
+{
+	"info": {
+		"_postman_id": "7abbea59-b90c-4224-9e33-9a7c8664d04c",
+		"name": "CashRegister",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Administrador\",\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remember_me\": false,\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remember_me\": false,\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CashRegisterController",
+			"item": [
+				{
+					"name": "CreateCashRegister",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bere",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denomination\":\"bill\",\r\n    \"value\":\"20000\",\r\n    \"quantity\":\"2\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/cashRegister/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"cashRegister",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CheckStatus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/jso",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bere",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/cashRegister/checkStatus",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"cashRegister",
+								"checkStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawAllMoney",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/cashRegister/withdrawAllMoney",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"cashRegister",
+								"withdrawAllMoney"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PaymentController",
+			"item": [
+				{
+					"name": "CreatePayment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/jso",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bere",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount_payable\":\"10000\",\r\n    \"customer_payment\":\"50000\",\r\n    \"payment_denomination\":\"bill\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/payments/createPayment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"payments",
+								"createPayment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TransactionLogsController",
+			"item": [
+				{
+					"name": "GetStatusByDate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/jso",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bere",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/transactionLog/getStatusByDate/2021-04-07 17:24:09",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"transactionLog",
+								"getStatusByDate",
+								"2021-04-07 17:24:09"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLogs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGNiY2QxYWE1NWVmNTQ3MWYyYmZhMTgyODJjZDczMjdlYzg3ZWZmMGI3NzFmNDUzZjkxMWFiYzUzOGQwMTk1NzlmODEzNzMzZGQyOTk2NjciLCJpYXQiOiIxNjE1MTY1NjUwLjM5MjgyMCIsIm5iZiI6IjE2MTUxNjU2NTAuMzkyOTIzIiwiZXhwIjoiMTY0NjcwMTY1MC4yNzk5OTEiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f_mhuYi3-ccj6CKJMG10qFnjONcGrudd-lIFDNYaCe2dzvCv9rXblJAJIMVcTPqcHyYzX4P-2hUE6weiHcJZZrGNGa4wNiiev6te2wRGx5G1ESU4PDQ6BhbjzcE_5hvPX1OG_vKn9Jwj3Lv87XToLcsP1RWW6K-TVkqOrL1m6--JfcUc6-awbi-hS4iXI3Rd8mFzQ7W0WdNelKUyckjO9THvxhWCVZr9HdkKhseiB8397LEt_Q8_9Yy4SZ3EoN6ayjN6ntrTkVMSPCJEU3sWxInL12pYcqH3TH1A0QdBnTJbOQe-g2JEzS2yMF-1bSTQ-WpzSyb4cjGQvA64spJu_USlc3dOITHDw6Kp1Ni2hkTTAT4-GgA8rHBDz4Al-yk9As05usWS-u_C_ZUZQtUYURcAe-wc3JktsVUfYzNSLqhuhhbbc8qJTg77EgDynd9fxc2DeT1iWyuR_8HOiBmvP8wCv8vkxsY5bhs2Iy7T3nOtzut_Or5NtV6-HrAW5FOBSa8rjHyeTu9wUIEs10pmX-xGLofcOeJsQQOdQJdTzlQJdpe32GAcRUoIsWOn-6tST3lJ27DI5zNwmgx49zvF0zYMBnK-sZoinh4gM9-_CxsIZWpoIwpwKeR-KMaxWkilpHYJOvYsICzVyyd7Jg6Ppm927oA5alSdIXqjSOh1NGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/jso",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bere",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/merqueoCash/transactionLog/getLogs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"merqueoCash",
+								"transactionLog",
+								"getLogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

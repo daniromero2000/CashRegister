@@ -1,61 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Topics
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+1. [Introduction](#introduction)
+2. [Requirements](#requirements)
+3. [Installation & Configuration](#installation-and-configuration)
+4. [License](#license)
+5. [Security Vulnerabilities](#security-vulnerabilities)
+6. [Miscellaneous](#miscellaneous)
 
-## About Laravel
+### Introduction
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Cash register is a system that will help you simulate a cash register through a REST API.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**The system offers the following services:**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1.	Load the base into the cash register.
+2.	Empty cash register.
+3.	Cash register status.
+4.	Make a payment.
+5.	View event log.
+6.	View the status of the box based on a specific date and time.
 
-## Learning Laravel
+### Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **OS**: Ubuntu 16.04 LTS or higher / Windows 7 or Higher (WampServer / XAMPP).
+- **SERVER**: Apache 2 or NGINX.
+- **RAM**: 4 GB or higher.
+- **PHP**: 7.3.0 or higher.
+- **Processor**: Clock Cycle 1 Ghz or higher.
+- **For MySQL users**: 5.7.23 or higher.
+- **For MariaDB users**: 10.2.7 or Higher.
+- **Node**: 8.11.3 LTS or higher.
+- **Composer**: 1.6.5 or higher.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Installation and Configuration
 
-## Laravel Sponsors
+**To clone and configure the cash register, run the following commands:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+composer require laravel/passport "~9.0"
+```
 
-### Premium Partners
+1. Create a new database.
+2. Copy the .env.example file content a paste it in the .env of the project.
+3. Set up all project config parameters in the .env project file (database connection)
+4. Run the following commands: 
+```
+php artisan migrate
+php artisan key:generate.
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+##### Install laravel passport
+```
+composer require laravel/passport "~9.0"
+php artisan migrate
+```
 
-## Contributing
+```
+php artisan passport:install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+##### Steps to run the tests
 
-## Code of Conduct
+configure the accesses to the database for the tests in the file .env.testing and run comand
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+vendor/bin/phpunit
+```
+
+##### Postman Collections
+
+To configure the route collection in Postman, copy the **CashRegister.postman_collection.json** file to your computer and import it into the Postman application.
+
+Note that you must first generate the token and replace it in the postman authorization, before you can use the endpoints
+##### On local:
+
+```
+php artisan serve
+```
+## License
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within the system, please email Daniel Romero at 123romerod@gmail.com. All security vulnerabilities will be addressed immediately. 
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
