@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Api\TransactionLogs;
 
 use App\Entities\TransactionLogs\UseCases\Interfaces\TransactionLogUseCaseInterface;
@@ -37,10 +36,10 @@ class TransactionLogController extends Controller
         $response = $this->transactionLogInterface->listTransactionLog();
 
         if (!$response['status']) {
-            return response()->json($response['message'], 500);
+            return response()->json($response, 500);
         }
 
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
 
     /**
@@ -52,9 +51,9 @@ class TransactionLogController extends Controller
         $response = $this->transactionLogInterface->getTransactionLogsByDate($date);
 
         if (!$response['status']) {
-            return response()->json($response['message'], 500);
+            return response()->json($response, 500);
         }
 
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
 }

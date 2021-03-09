@@ -1,9 +1,11 @@
 <?php
 
-
 namespace App\Entities\TransactionLogs\UseCases\Interfaces;
 
-
+/**
+ * Interface TransactionLogUseCaseInterface
+ * @package App\Entities\TransactionLogs\UseCases\Interfaces
+ */
 interface TransactionLogUseCaseInterface
 {
     /**

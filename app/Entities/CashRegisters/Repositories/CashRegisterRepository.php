@@ -3,7 +3,6 @@
 namespace App\Entities\CashRegisters\Repositories;
 
 use App\Entities\CashRegisters\CashRegister;
-use App\Entities\CashRegisters\Exceptions\CreateCashRegisterErrorException;
 use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
 use Illuminate\Database\QueryException;
 
@@ -51,9 +50,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
      */
     public function createCashRegister(array $data): CashRegister
     {
-        $cashRegister = $this->cashRegister->create($data);
-
-        return $cashRegister;
+        return $this->cashRegister->create($data);
     }
 
     /**

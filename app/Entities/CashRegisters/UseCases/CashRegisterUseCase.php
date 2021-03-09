@@ -53,7 +53,7 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
                     'user_id' => auth()->user() ? auth()->user()->id : 1
                 ]);
 
-            return ['status' => true, 'message' => 'success'];
+            return ['status' => true, 'message' => 'successfully loaded base'];
         } catch (\Exception $e) {
             return ['status' => false, 'message' => $e->getMessage()];
         }
@@ -89,11 +89,11 @@ class CashRegisterUseCase implements CashRegisterUseCaseInterface
     public function withdrawAllMoney(): array
     {
         $response = $this->cashRegisterInterface->setEmptyCashRegister();
+
         if ($response) {
             return ['status' => true, 'message' => 'success'];
         }
 
         return ['status' => false, 'message' => 'error'];
-
     }
 }

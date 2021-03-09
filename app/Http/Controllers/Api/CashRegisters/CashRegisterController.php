@@ -37,10 +37,10 @@ class CashRegisterController extends Controller
         $response = $this->cashRegisterInterface->createMoneyBase($createCashRegisterRequest->input());
 
         if(!$response['status']){
-            return response()->json($response['message'], 500);
+            return response()->json($response, 500);
         }
 
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
 
     /**
@@ -50,7 +50,7 @@ class CashRegisterController extends Controller
     {
         $response = $this->cashRegisterInterface->checkStatus();
 
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
 
     /**
@@ -61,9 +61,9 @@ class CashRegisterController extends Controller
         $response = $this->cashRegisterInterface->withdrawAllMoney();
 
         if(!$response['status']){
-            return response()->json($response['message'], 500);
+            return response()->json($response, 500);
         }
 
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
 }

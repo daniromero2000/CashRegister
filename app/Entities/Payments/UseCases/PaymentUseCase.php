@@ -3,7 +3,6 @@
 namespace App\Entities\Payments\UseCases;
 
 use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
-use App\Entities\Payments\Payment;
 use App\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
 use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
 use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
@@ -17,6 +16,8 @@ class PaymentUseCase implements PaymentUseCaseInterface
 {
     /**
      * @var PaymentRepositoryInterface
+     * @var CashRegisterRepositoryInterface
+     * @var TransactionLogRepositoryInterface
      */
     protected $paymentInterface, $cashRegisterInterface, $transactionLogInterface;
 
@@ -24,6 +25,7 @@ class PaymentUseCase implements PaymentUseCaseInterface
      * PaymentUseCase constructor.
      * @param PaymentRepositoryInterface $paymentRepositoryInterface
      * @param CashRegisterRepositoryInterface $cashRegisterRepositoryInterface
+     * @param TransactionLogRepositoryInterface $transactionLogRepositoryInterface
      */
     public function __construct(
         PaymentRepositoryInterface $paymentRepositoryInterface,
@@ -42,7 +44,6 @@ class PaymentUseCase implements PaymentUseCaseInterface
      */
     public function createPayment(array $data): array
     {
-
         try {
             $checkCashReturn = $this->getTotalReturned($data['customer_payment'], $data['amount_payable']);
             if (empty($checkCashReturn)) {
@@ -69,7 +70,6 @@ class PaymentUseCase implements PaymentUseCaseInterface
         } catch (\Exception $e) {
             return ['status' => false, 'message' => $e->getMessage()];
         }
-
     }
 
     /**

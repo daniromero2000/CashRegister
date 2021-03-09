@@ -23,6 +23,11 @@ interface TransactionLogRepositoryInterface
      */
     public function createTransactionLog(array $data): TransactionLog;
 
+    /**
+     * @param string $date
+     * @param array|string[] $columns
+     * @return array
+     */
     public function getTransactionLogsByDate(string $date, array $columns = ['*']): array;
 
 

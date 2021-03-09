@@ -51,10 +51,13 @@ class TransactionLogControllerTest extends TestCase
         $request = $this->get(route('transactionLog.getLogs'), ['Accept' => 'application/json']);
 
         $request->assertStatus(200)->assertJsonStructure([
-            [
-                'type',
-                'value',
-                'movements'
+            'status',
+            'message' => [
+                [
+                    'type',
+                    'value',
+                    'movements'
+                ]
             ]
         ]);
     }
@@ -81,7 +84,10 @@ class TransactionLogControllerTest extends TestCase
         $request = $this->get(route('transactionLog.getStatusByDate', $log->created_at), ['Accept' => 'application/json']);
 
         $request->assertStatus(200)->assertJson([
-            'total_cash_register' => $totalCashRegister
+            'status' => true,
+            'message' => [
+                'total_cash_register' => $totalCashRegister
+            ]
         ]);
     }
 

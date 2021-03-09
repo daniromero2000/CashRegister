@@ -10,6 +10,7 @@ use Laravel\Passport\HasApiTokens;
 /**
  * Class User
  * @package App\Entities\Users
+ * @author Daniel Romero - 123romerod@gmail.com
  */
 class User extends Authenticatable
 {

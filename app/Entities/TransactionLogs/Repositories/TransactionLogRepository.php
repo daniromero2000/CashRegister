@@ -2,7 +2,6 @@
 
 namespace App\Entities\TransactionLogs\Repositories;
 
-use App\Entities\TransactionLogs\Exceptions\CreateTransactionLogErrorException;
 use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
 use App\Entities\TransactionLogs\TransactionLog;
 use Illuminate\Database\QueryException;
@@ -41,13 +40,17 @@ class TransactionLogRepository implements TransactionLogRepositoryInterface
     /**
      * @param array $data
      * @return TransactionLog
-     * @throws CreateTransactionLogErrorException
      */
     public function createTransactionLog(array $data): TransactionLog
     {
         return $this->transactionLog->create($data);
     }
 
+    /**
+     * @param string $date
+     * @param array|string[] $columns
+     * @return array
+     */
     public function getTransactionLogsByDate(string $date, array $columns = ['*']): array
     {
         return $this->transactionLog->where('created_at', '<=', $date)->get($columns)->toArray();

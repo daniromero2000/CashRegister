@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Api\Payments;
 
 use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
@@ -30,6 +29,10 @@ class PaymentController extends Controller
         $this->paymentInterface = $paymentUseCaseInterface;
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function createPayment(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -45,9 +48,8 @@ class PaymentController extends Controller
         $response = $this->paymentInterface->createPayment($request->input());
 
         if(!$response['status']){
-            return response()->json($response['message'], 500);
+            return response()->json($response, 500);
         }
-        return response()->json($response['message'], 200);
+        return response()->json($response, 200);
     }
-
 }

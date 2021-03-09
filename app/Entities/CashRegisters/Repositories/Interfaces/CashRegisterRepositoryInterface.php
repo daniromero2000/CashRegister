@@ -2,7 +2,6 @@
 
 namespace App\Entities\CashRegisters\Repositories\Interfaces;
 
-use App\Entities\CashRegisters\Exceptions\CreateCashRegisterErrorException;
 use App\Entities\CashRegisters\CashRegister;
 
 /**

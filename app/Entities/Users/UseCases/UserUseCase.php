@@ -5,6 +5,7 @@ namespace App\Entities\Users\UseCases;
 use App\Entities\Users\Repositories\Interfaces\UserRepositoryInterface;
 use App\Entities\Users\UseCases\Interfaces\UserUseCaseInterface;
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,11 @@ class UserUseCase implements UserUseCaseInterface
         ], 201);
     }
 
+    /**
+     * @param array $data
+     * @return JsonResponse
+     * @throws InvalidFormatException
+     */
     public function loginUser(array $data): JsonResponse
     {
         if (!Auth::attempt($data)) {
