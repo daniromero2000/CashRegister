@@ -130,7 +130,9 @@ class CashRegisterControllerTest extends TestCase
         $request->assertStatus(200);
     }
 
-
+    /**
+     * This function is intended to simulate an error when emptying the cash register
+     */
     public function testWithdrawAllMoneyCashRegisterError(): void
     {
         $request = $this->get(route('cashFlow.withdrawAllMoney'), ['Accept' => 'application/json']);

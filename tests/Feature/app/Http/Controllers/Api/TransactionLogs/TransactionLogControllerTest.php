@@ -44,6 +44,9 @@ class TransactionLogControllerTest extends TestCase
         return $logs;
     }
 
+    /**
+     * This function aims to simulate the return of a successful log list
+     */
     public function testListTransactionLogSuccess(): void
     {
         $this->createDataForTests();
@@ -62,6 +65,9 @@ class TransactionLogControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * This function aims to simulate a server error when returning a list of records
+     */
     public function testListTransactionLogError(): void
     {
         $request = $this->get(route('transactionLog.getLogs'), ['Accept' => 'application/json']);
@@ -69,6 +75,9 @@ class TransactionLogControllerTest extends TestCase
         $request->assertStatus(500);
     }
 
+    /**
+     *This function aims to simulate the return of a list of records based on a successful date
+     */
     public function testGetStatusByDateSuccess(): void
     {
         $data = $this->createDataForTests();
@@ -91,6 +100,9 @@ class TransactionLogControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * This function aims to simulate an error in the server when returning a list of records based on a date
+     */
     public function testGetStatusByDateError(): void
     {
         $request = $this->get(
@@ -100,6 +112,9 @@ class TransactionLogControllerTest extends TestCase
         $request->assertStatus(500);
     }
 
+    /**
+     *This function aims to simulate an error in the server when returning a list of records based on an invalid date.
+     */
     public function testGetStatusByDateNotFound(): void
     {
         $request = $this->get(
