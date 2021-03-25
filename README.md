@@ -37,7 +37,7 @@ Cash register is a system that will help you simulate a cash register through a 
 **To clone and configure the cash register, run the following commands:**
 
 ```
-composer require laravel/passport "~9.0"
+composer install
 ```
 
 1. Create a new database.
@@ -51,7 +51,7 @@ php artisan key:generate.
 
 ##### Install laravel passport
 ```
-composer install"
+composer require laravel/passport "~9.0"
 php artisan migrate
 ```
 
