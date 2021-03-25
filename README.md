@@ -51,7 +51,7 @@ php artisan key:generate.
 
 ##### Install laravel passport
 ```
-composer require laravel/passport "~9.0"
+composer install"
 php artisan migrate
 ```
 
