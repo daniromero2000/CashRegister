@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Interfaces\Users;
 
-use App\Entities\Users\User;
+
+use App\Models\User;
 
 /**
  * Interface UserRepositoryInterface
@@ -15,5 +16,4 @@ interface UserRepositoryInterface
      * @return User
      */
     public function createUser(array $data): User;
-
 }

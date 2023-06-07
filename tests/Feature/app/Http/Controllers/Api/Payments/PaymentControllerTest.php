@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\app\Http\Controllers\Api\Payments;
 
-use App\Entities\Users\User;
 use App\Models\CashRegister;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
@@ -15,7 +14,7 @@ use Tests\TestCase;
  */
 class PaymentControllerTest extends TestCase
 {
-    use WithoutMiddleware, RefreshDatabase;
+    use WithoutMiddleware;
 
     protected function setUp(): void
     {
@@ -29,19 +28,19 @@ class PaymentControllerTest extends TestCase
     {
         $data = [];
 
-        $request = $this->post(route('payment.createPayment'), $data, ['Accept' => 'application/json']);
+        $request = $this->post(route('payment.create'), $data, ['Accept' => 'application/json']);
 
         $request->assertStatus(422)
             ->assertJson([
                 'message' => [
-                    'customer_payment' => [
-                        'The customer payment field is required.'
+                    'amount_received' => [
+                        'The amount received field is required.'
                     ],
-                    'amount_payable' => [
-                        'The amount payable field is required.'
+                    'amount' => [
+                        'The amount field is required.'
                     ],
-                    'payment_denomination' => [
-                        'The payment denomination field is required.'
+                    'denomination' => [
+                        'The denomination field is required.'
                     ]
                 ]
             ]);
@@ -50,19 +49,20 @@ class PaymentControllerTest extends TestCase
     /**
      * This function aims to simulate a successful payment
      */
-    public function testCreatePaymentSuccess():void
+    public function testCreatePaymentSuccess(): void
     {
-        factory(User::class)->create();
+        $user = factory(User::class)->create();
 
         factory(CashRegister::class, 100)->create();
 
         $data = [
-            'customer_payment'      => '50000',
-            'amount_payable'        => '10000',
-            'payment_denomination'  => 'bill'
+            'amount_received' => '50000',
+            'amount' => '10000',
+            'denomination' => 'bill'
         ];
 
-        $request = $this->post(route('payment.createPayment'), $data, ['Accept' => 'application/json']);
+        $request = $this->actingAs($user)
+            ->postJson(route('payment.create'), $data);
 
         $request->assertStatus(200);
     }
@@ -70,15 +70,15 @@ class PaymentControllerTest extends TestCase
     /**
      * This function aims to simulate a server error when making a payment and there is no user in session
      */
-    public function testCreatePaymentErrorNotUser():void
+    public function testCreatePaymentErrorNotUser(): void
     {
         $data = [
-            'customer_payment'      => '50000',
-            'amount_payable'        => '20000',
-            'payment_denomination'  => 'bill'
+            'amount_received' => '50000',
+            'amount' => '20000',
+            'denomination' => 'bill'
         ];
 
-        $request = $this->post(route('payment.createPayment'), $data, ['Accept' => 'application/json']);
+        $request = $this->post(route('payment.create'), $data, ['Accept' => 'application/json']);
 
         $request->assertStatus(500);
     }
@@ -86,17 +86,17 @@ class PaymentControllerTest extends TestCase
     /**
      * This function aims to simulate a server error when making a payment and there is no money to return
      */
-    public function testCreatePaymentErrorNotReturnCash():void
+    public function testCreatePaymentErrorNotReturnCash(): void
     {
         factory(CashRegister::class, 1)->create();
 
         $data = [
-            'customer_payment'      => '50000',
-            'amount_payable'        => '10000',
-            'payment_denomination'  => 'bill'
+            'amount_received' => '50000',
+            'amount' => '10000',
+            'denomination' => 'bill'
         ];
 
-        $request = $this->post(route('payment.createPayment'), $data, ['Accept' => 'application/json']);
+        $request = $this->post(route('payment.create'), $data, ['Accept' => 'application/json']);
 
         $request->assertStatus(500);
     }

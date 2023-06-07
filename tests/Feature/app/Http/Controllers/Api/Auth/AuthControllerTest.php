@@ -2,7 +2,8 @@
 
 namespace Tests\Feature\app\Http\Controllers\Api\Auth;
 
-use App\Entities\Users\User;
+use App\Models\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 /**
@@ -12,15 +13,20 @@ use Tests\TestCase;
  */
 class AuthControllerTest extends TestCase
 {
+    use WithoutMiddleware;
+
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();
-        $this->artisan('passport:install');
+
+        $this->user = factory(User::class)->create();
     }
 
-    public function testSignup()
+    public function testRegister()
     {
-        $response = $this->post(route('signup'), [
+        $response = $this->post(route('register'), [
             'name' => 'Test',
             'email' => 'test@test.test',
             'password' => 'test'
@@ -28,7 +34,7 @@ class AuthControllerTest extends TestCase
             'Accept' => 'application/json'
         ]);
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 
     public function testLoginUnauthorized(): void
@@ -44,56 +50,25 @@ class AuthControllerTest extends TestCase
         ]);
 
 
-        $response->assertStatus(401);
-    }
-
-    public function testLogoutUnauthorized(): void
-    {
-        $userFactory = factory(User::class)->create();
-
-        $response = $this->post(route('login'), [
-            'email' => $userFactory->email,
-            'password' => 'password',
-            'remember_me' => true
-        ], [
-            'Accept' => 'application/json'
-        ]);
-
-
-        $response->assertStatus(200);
-        $response->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
-
-        $token = json_decode($response->getContent(), true);
-
-        $responseLogout = $this->actingAs($userFactory)
-            ->get(route('logout'),
-                [
-                    'Accept' => 'application/json',
-                    'Authorization' => 'error'
-                ]);
-
-        $responseLogout->assertStatus(200);
+        $response->assertStatus(400);
     }
 
     public function testLoginAndLogout(): void
     {
-        $userFactory = factory(User::class)->create();
-
         $response = $this->post(route('login'), [
-            'email' => $userFactory->email,
+            'email' => $this->user->email,
             'password' => 'password',
             'remember_me' => true
         ], [
             'Accept' => 'application/json'
         ]);
 
-
-        $response->assertStatus(200);
-        $response->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
+        $response->assertStatus(200)
+            ->assertJsonStructure(['access_token', 'token_type']);
 
         $token = json_decode($response->getContent(), true);
 
-        $responseLogout = $this->actingAs($userFactory)
+        $responseLogout = $this->actingAs($this->user)
             ->get(route('logout'),
                 [
                     'Accept' => 'application/json',

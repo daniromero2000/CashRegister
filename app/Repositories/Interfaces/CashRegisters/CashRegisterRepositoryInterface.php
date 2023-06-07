@@ -11,11 +11,10 @@ use App\Models\CashRegister;
 interface CashRegisterRepositoryInterface
 {
     /**
-     * @param array|string[] $columns
      * @param array $where
      * @return array
      */
-    public function list(array $columns = ['*'], array $where = []): array;
+    public function list(array $where = []): iterable;
 
     /**
      * @param array $data
@@ -24,11 +23,25 @@ interface CashRegisterRepositoryInterface
     public function create(array $data): CashRegister;
 
     /**
+     * @param int $id
+     * @param array $data
+     * @return CashRegister
+     */
+    public function update(int $id, array $data): CashRegister;
+
+    /**
      * @param array $data
      * @param string $operator
      * @return CashRegister
      */
     public function createOrUpdate(array $data, string $operator = 'sum'): CashRegister;
+
+    /**
+     * @param string $denomination
+     * @param float $value
+     * @return CashRegister|null
+     */
+    public function findByByDenominationAndValue(string $denomination, float $value): ?CashRegister;
 
     /**
      * @return bool

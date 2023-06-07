@@ -27,20 +27,17 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     }
 
     /**
-     * @param array|string[] $columns
      * @param array $where
      * @return array
      */
-    public function list(array $columns = ['*'], array $where = []): array
+    public function list(array $where = []): iterable
     {
-        $cashRegisterList = $this->cashRegister
+        return $this->cashRegister
             ->when($where, function ($query, $where) {
                 return $query->where($where['column'], $where['operator'], $where['value']);
             })
             ->orderBy('value', 'DESC')
-            ->get($columns);
-
-        return (empty($cashRegisterList)) ? [] : $cashRegisterList->toArray();
+            ->get();
     }
 
     /**
@@ -50,6 +47,19 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     public function create(array $data): CashRegister
     {
         return $this->cashRegister->create($data);
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return CashRegister
+     */
+    public function update(int $id, array $data): CashRegister
+    {
+        $model = $this->cashRegister->find($id);
+        $model->update($data);
+
+        return $model;
     }
 
     /**
@@ -65,18 +75,26 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             ->first();
 
         if ($cashRegister) {
-            if($operator == 'sum'){
+            if ($operator == 'sum') {
                 $quantity = $cashRegister->quantity + $data['quantity'];
-            }else{
+            } else {
                 $quantity = $cashRegister->quantity - $data['quantity'];
             }
 
             $cashRegister->update(['quantity' => $quantity]);
-        }else{
+        } else {
             $cashRegister = $this->create($data);
         }
 
         return $cashRegister;
+    }
+
+    public function findByByDenominationAndValue(string $denomination, float $value): ?CashRegister
+    {
+        return $this->cashRegister
+            ->where('denomination', $denomination)
+            ->where('value', $value)
+            ->first();
     }
 
     /**

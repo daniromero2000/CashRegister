@@ -25,7 +25,7 @@ Cash register is a system that will help you simulate a cash register through a 
 - **OS**: Ubuntu 16.04 LTS or higher / Windows 7 or Higher (WampServer / XAMPP).
 - **SERVER**: Apache 2 or NGINX.
 - **RAM**: 4 GB or higher.
-- **PHP**: 7.3.0 or higher.
+- **PHP**: 8.0 or higher.
 - **Processor**: Clock Cycle 1 Ghz or higher.
 - **For MySQL users**: 5.7.23 or higher.
 - **For MariaDB users**: 10.2.7 or Higher.
@@ -49,16 +49,6 @@ php artisan migrate
 php artisan key:generate.
 ```
 
-##### Install laravel passport
-```
-composer require laravel/passport "~9.0"
-php artisan migrate
-```
-
-```
-php artisan passport:install
-```
-
 ##### Steps to run the tests
 
 configure the accesses to the database for the tests in the file .env.testing and run comand
@@ -67,9 +57,9 @@ configure the accesses to the database for the tests in the file .env.testing an
 vendor/bin/phpunit
 ```
 
-##### Postman Collections
+##### Postman Apis
 
-To configure the route collection in Postman, copy the **CashRegister.postman_collection.json** file to your computer and import it into the Postman application.
+https://documenter.getpostman.com/view/10069404/2s93sZ7EfL
 
 Note that you must first generate the token and replace it in the postman authorization, before you can use the endpoints
 ##### On local:

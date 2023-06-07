@@ -2,86 +2,18 @@
 
 namespace App\UseCases\Users;
 
-use App\Repositories\Interfaces\Users\UserRepositoryInterface;
 use App\UseCases\Interfaces\Users\UserUseCaseInterface;
-use Carbon\Carbon;
-use Carbon\Exceptions\InvalidFormatException;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
+use JWTAuth;
 
 class UserUseCase implements UserUseCaseInterface
 {
     /**
-     * @var UserRepositoryInterface
+     * @return bool
      */
-    protected $userInterface;
-
-    /**
-     * UserUseCase constructor.
-     * @param UserRepositoryInterface $userRepositoryInterface
-     */
-    public function __construct(UserRepositoryInterface $userRepositoryInterface)
+    public function logout(): bool
     {
-        $this->userInterface = $userRepositoryInterface;
-    }
+        JWTAuth::invalidate(JWTAuth::getToken());
 
-    /**
-     * @param array $data
-     * @return JsonResponse
-     */
-    public function createUser(array $data): JsonResponse
-    {
-        $this->userInterface->createUser($data);
-
-        return response()->json([
-            'message' => __('auth.create_user')
-        ], 201);
-    }
-
-    /**
-     * @param array $data
-     * @return JsonResponse
-     * @throws InvalidFormatException
-     */
-    public function loginUser(array $data): JsonResponse
-    {
-        if (!Auth::attempt($data)) {
-            return response()->json([
-                'message' => __('auth.unauthorized')
-            ], 401);
-        }
-
-        $user = request()->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-
-        $token = $tokenResult->token;
-        $token->expires_at = Carbon::now()->add('hour', 8);
-        $token->save();
-
-        return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($token->expires_at)->toDateTimeString()
-        ]);
-    }
-
-    /**
-     * @return JsonResponse
-     */
-    public function logoutUser(): JsonResponse
-    {
-        $user = auth()->guard('api')->user();
-
-        if (!$user) {
-            return response()->json([
-                'message' => __('auth.unauthenticated')
-            ]);
-        }
-
-        auth()->guard('api')->user()->token()->revoke();
-
-        return response()->json([
-            'message' => __('auth.logout')
-        ]);
+        return true;
     }
 }

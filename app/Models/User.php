@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticate;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
  * @package App\Entities\Users
  * @author Daniel Romero - 123romerod@gmail.com
  */
-class User extends Authenticate
+class User extends Authenticate implements JWTSubject
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -41,4 +41,14 @@ class User extends Authenticate
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

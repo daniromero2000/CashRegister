@@ -11,19 +11,7 @@ use Illuminate\Http\JsonResponse;
 interface UserUseCaseInterface
 {
     /**
-     * @param array $data
-     * @return JsonResponse
+     * @return bool
      */
-    public function createUser(array $data): JsonResponse;
-
-    /**
-     * @param array $data
-     * @return JsonResponse
-     */
-    public function loginUser(array $data): JsonResponse;
-
-    /**
-     * @return JsonResponse
-     */
-    public function logoutUser(): JsonResponse;
+    public function logout(): bool;
 }
