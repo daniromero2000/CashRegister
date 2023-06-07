@@ -2,8 +2,7 @@
 
 namespace Tests\Feature\app\Entities\CashRegisters\Repositories;
 
-use App\Entities\CashRegisters\CashRegister;
-use App\Entities\CashRegisters\Repositories\CashRegisterRepository;
+use App\Models\CashRegister;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

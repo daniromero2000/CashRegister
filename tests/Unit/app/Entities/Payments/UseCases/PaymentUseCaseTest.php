@@ -2,11 +2,10 @@
 
 namespace Tests\Unit\app\Entities\Payments\UseCases;
 
-use App\Entities\CashRegisters\Repositories\Interfaces\CashRegisterRepositoryInterface;
-use App\Entities\Payments\Repositories\Interfaces\PaymentRepositoryInterface;
-use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
-use App\Entities\Payments\UseCases\PaymentUseCase;
-use App\Entities\TransactionLogs\Repositories\Interfaces\TransactionLogRepositoryInterface;
+use App\Repositories\Interfaces\CashRegisters\CashRegisterRepositoryInterface;
+use App\Repositories\Interfaces\Payments\PaymentRepositoryInterface;
+use App\Repositories\Interfaces\TransactionLogs\TransactionLogRepositoryInterface;
+use App\UseCases\Payments\PaymentUseCase;
 use Monolog\Test\TestCase;
 
 /**

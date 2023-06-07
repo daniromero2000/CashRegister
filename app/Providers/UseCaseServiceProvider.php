@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Entities\CashRegisters\UseCases\CashRegisterUseCase;
-use App\Entities\CashRegisters\UseCases\Interfaces\CashRegisterUseCaseInterface;
-use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
-use App\Entities\Payments\UseCases\PaymentUseCase;
-use App\Entities\TransactionLogs\UseCases\Interfaces\TransactionLogUseCaseInterface;
-use App\Entities\TransactionLogs\UseCases\TransactionLogUseCase;
-use App\Entities\Users\UseCases\Interfaces\UserUseCaseInterface;
-use App\Entities\Users\UseCases\UserUseCase;
+use App\UseCases\CashRegisters\CashRegisterUseCase;
+use App\UseCases\Interfaces\CashRegisters\CashRegisterUseCaseInterface;
+use App\UseCases\Interfaces\Payments\PaymentUseCaseInterface;
+use App\UseCases\Interfaces\TransactionLogs\TransactionLogUseCaseInterface;
+use App\UseCases\Interfaces\Users\UserUseCaseInterface;
+use App\UseCases\Payments\PaymentUseCase;
+use App\UseCases\TransactionLogs\TransactionLogUseCase;
+use App\UseCases\Users\UserUseCase;
 use Illuminate\Support\ServiceProvider;
 
 class UseCaseServiceProvider extends ServiceProvider

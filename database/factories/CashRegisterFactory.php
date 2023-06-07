@@ -1,7 +1,7 @@
 <?php
 /** @var Factory $factory */
 
-use App\Entities\CashRegisters\CashRegister;
+use App\Models\CashRegister;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 

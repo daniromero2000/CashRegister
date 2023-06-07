@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Payments;
 
-use App\Entities\Payments\UseCases\Interfaces\PaymentUseCaseInterface;
+use App\UseCases\Interfaces\Payments\PaymentUseCaseInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class PaymentController

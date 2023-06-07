@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\app\Http\Controllers\Api\Payments;
 
-use App\Entities\CashRegisters\CashRegister;
 use App\Entities\Users\User;
+use App\Models\CashRegister;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;

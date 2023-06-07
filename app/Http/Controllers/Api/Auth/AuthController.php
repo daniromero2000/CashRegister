@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Entities\Users\Requests\LoginRequest;
-use App\Entities\Users\Requests\SignUpRequest;
-use App\Entities\Users\UseCases\Interfaces\UserUseCaseInterface;
 use App\Http\Controllers\Controller;
-use App\Entities\Users\User;
-use Carbon\Carbon;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\SignUpRequest;
+use App\UseCases\Interfaces\Users\UserUseCaseInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AuthController

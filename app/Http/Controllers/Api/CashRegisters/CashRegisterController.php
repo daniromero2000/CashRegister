@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\CashRegisters;
 
-use App\Entities\CashRegisters\Requests\CreateCashRegisterRequest;
-use App\Entities\CashRegisters\UseCases\Interfaces\CashRegisterUseCaseInterface;
+use App\Http\Requests\CreateCashRegisterRequest;
+use App\UseCases\Interfaces\CashRegisters\CashRegisterUseCaseInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 

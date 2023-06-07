@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api\TransactionLogs;
 
-use App\Entities\TransactionLogs\UseCases\Interfaces\TransactionLogUseCaseInterface;
+use App\UseCases\Interfaces\TransactionLogs\TransactionLogUseCaseInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 /**
